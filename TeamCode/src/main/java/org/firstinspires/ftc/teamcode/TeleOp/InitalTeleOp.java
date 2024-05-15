@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /*
@@ -64,7 +65,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: Omni Linear OpMode", group="Linear OpMode")
+@TeleOp(name="Lightwork", group="Linear OpMode")
 @Disabled
 public class InitalTeleOp extends LinearOpMode {
 
@@ -73,7 +74,12 @@ public class InitalTeleOp extends LinearOpMode {
     private DcMotor outake_intake_motor = null;
     private DcMotor arm_motor = null;
     private DcMotor wrist_motor = null;
-    private DcMotor rightBackDrive, = null; // hee hee hee haa change later
+    private DcMotor rightFrontDrive = null; // hee hee hee haa change later
+
+    private DcMotor rightBackDrive = null;
+
+    private DcMotor leftFrontDrive = null;
+    private DcMotor leftBackDrive = null;
 
 
     @Override
@@ -81,10 +87,13 @@ public class InitalTeleOp extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        outake_intake_motor  = hardwareMap.get(DcMotor.class, "test:Intake_and_outtake_motor ");
-        arm_motor  = hardwareMap.get(DcMotor.class, "test:arm_motor");
+        outake_intake_motor = hardwareMap.get(DcMotor.class, "Intake_and_outtake_motor ");
+        arm_motor = hardwareMap.get(DcMotor.class, "arm_motor");
         wrist_motor = hardwareMap.get(DcMotor.class, "test:wrist_motor");
-        //rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive ");
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "left_front_drive");
+        leftBackDrive = hardwareMap.get(DcMotor.class,"left_back_drive");
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -97,14 +106,15 @@ public class InitalTeleOp extends LinearOpMode {
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.
 
-        //leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        //leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-//      rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
         outake_intake_motor.setDirection(DcMotor.Direction.REVERSE);
         arm_motor.setDirection(DcMotor.Direction.FORWARD);
         wrist_motor.setDirection(DcMotor.Direction.FORWARD);
+
 
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
@@ -117,46 +127,58 @@ public class InitalTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
 
+            while (gamepad2.back) { // yfu
+
+                if (gamepad2.a) {
+                    wrist_motor.setTargetPosition(400); // scoring position
+                    wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    wrist_motor.setPower(0.3);
+                    arm_motor.setTargetPosition(450);
+                    arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    arm_motor.setPower(0.4);
 
 
 
+                }
+
+                    if(gamepad2.y) {
+                wrist_motor.setTargetPosition(0); //rest position
+                wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                 wrist_motor.setPower(0.3);
+               arm_motor.setTargetPosition(0);
+                        arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        arm_motor.setPower(0.4);
 
 
+                    }
+                if(gamepad2.x){
+
+                    outake_intake_motor.setPower(1);
+                }
+                else{
+
+                outake_intake_motor.setPower(0);
+                }
+                if(gamepad2.b){
+                    outake_intake_motor.setPower(-1);
+                }
+                else{
+                   outake_intake_motor.setPower(0);
+                }
 
 
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            double max;
-
+                double max;
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.left_stick_x;
-            double yaw     =  gamepad1.right_stick_x;
+            double axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            double lateral = gamepad1.left_stick_x;
+            double yaw = gamepad1.right_stick_x;
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
-            double leftFrontPower  = axial + lateral + yaw;
+            double leftFrontPower = axial + lateral + yaw;
             double rightFrontPower = axial - lateral - yaw;
-            double leftBackPower   = axial - lateral + yaw;
-            double rightBackPower  = axial + lateral - yaw;
+            double leftBackPower = axial - lateral + yaw;
+            double rightBackPower = axial + lateral - yaw;
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
@@ -165,10 +187,10 @@ public class InitalTeleOp extends LinearOpMode {
             max = Math.max(max, Math.abs(rightBackPower));
 
             if (max > 1.0) {
-                leftFrontPower  /= max;
+                leftFrontPower /= max;
                 rightFrontPower /= max;
-                leftBackPower   /= max;
-                rightBackPower  /= max;
+                leftBackPower /= max;
+                rightBackPower /= max;
             }
 
             // This is test code:
@@ -195,11 +217,54 @@ public class InitalTeleOp extends LinearOpMode {
 //            rightBackDrive.setPower(rightBackPower);
 
 
-
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
             telemetry.update();
         }
-    }}
+    }
+}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* intake: while(balgh balh)
+
+        if bumprt
+pos and range ticks
+
+
+rest of stuff: if (blah blah blah blah)
+blah blah
+
+also change arms to make dynamic
+plus drone launcher for gamepad 1
+
+
+ also change and watch artemis programming mtoors video YAYYY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
