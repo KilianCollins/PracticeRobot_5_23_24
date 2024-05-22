@@ -117,7 +117,7 @@ public class EditedTeleOp extends LinearOpMode {
 
         outake_intake_motor.setDirection(DcMotor.Direction.REVERSE);
         arm_motor.setDirection(DcMotor.Direction.REVERSE);
-        wrist_motor.setDirection(DcMotor.Direction.REVERSE);
+        wrist_motor.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -135,23 +135,23 @@ public class EditedTeleOp extends LinearOpMode {
 //            you dont need  this you can implament it but it means that for any of your actions to be preformed by the found bot
 //            you will have to hold down the "back" button while request any other action
 
-            if (gamepad2.a) {
-                wrist_motor.setTargetPosition(697); // scoring position 697 ticks
+            if (gamepad2.y) {
+                wrist_motor.setTargetPosition(350); // scoring position 697 ticks
                 wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                wrist_motor.setPower(0.4);
-                arm_motor.setTargetPosition(974); // 974 tick revolution
+                wrist_motor.setPower(0.6);
+                arm_motor.setTargetPosition(3500); // 974 tick revolution
                 arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                arm_motor.setPower(0.4);
+                arm_motor.setPower(0.6);
 
             }
 
-            if (gamepad2.y) {
-                wrist_motor.setTargetPosition(240); //rest position
+            if (gamepad2.a) {
+                wrist_motor.setTargetPosition(1150); //rest position
                 wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                wrist_motor.setPower(-0.8);
-                arm_motor.setTargetPosition(974);
+                wrist_motor.setPower(-0.6);
+                arm_motor.setTargetPosition(100);
                 arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                arm_motor.setPower(-0.8);
+                arm_motor.setPower(-0.6);
 
 
 
@@ -169,15 +169,13 @@ public class EditedTeleOp extends LinearOpMode {
                 outake_intake_motor.setPower(0);
             }
 
-                if (gamepad2.x) {
-                    wrist_motor.setTargetPosition(697); // scoring position 697 ticks
-                    wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    wrist_motor.setPower(0.6);
 
+                    if(gamepad2.b){
 
-                }
-
-
+                        wrist_motor.setTargetPosition(1100);
+                        wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        wrist_motor.setPower(0.6);
+                    }
 
 
 

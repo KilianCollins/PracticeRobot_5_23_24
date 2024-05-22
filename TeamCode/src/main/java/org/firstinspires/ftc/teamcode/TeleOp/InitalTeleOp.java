@@ -66,7 +66,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @TeleOp(name="Light", group="Linear OpMode")
-@Disabled
+
 public class InitalTeleOp extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
@@ -89,7 +89,7 @@ public class InitalTeleOp extends LinearOpMode {
         // to the names assigned during the robot configuration step on the DS or RC devices.
         outake_intake_motor = hardwareMap.get(DcMotor.class, "Intake_and_outtake_motor ");
         arm_motor = hardwareMap.get(DcMotor.class, "arm_motor");
-        wrist_motor = hardwareMap.get(DcMotor.class, "test:wrist_motor");
+        wrist_motor = hardwareMap.get(DcMotor.class, "wrist");
         rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive ");
         leftFrontDrive = hardwareMap.get(DcMotor.class, "left_front_drive");
