@@ -64,7 +64,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Harsha&Andrew", group="Linear OpMode")
+@TeleOp(name="Found TeleOp", group="Linear OpMode")
 
 public class EditedTeleOp extends LinearOpMode {
 
@@ -139,14 +139,14 @@ public class EditedTeleOp extends LinearOpMode {
                 wrist_motor.setTargetPosition(350); // scoring position 697 ticks
                 wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 wrist_motor.setPower(0.6);
-                arm_motor.setTargetPosition(3500); // 974 tick revolution
+                arm_motor.setTargetPosition(3350); // 974 tick revolution
                 arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 arm_motor.setPower(0.6);
 
             }
 
             if (gamepad2.a) {
-                wrist_motor.setTargetPosition(1150); //rest position
+                wrist_motor.setTargetPosition(1200); //rest position
                 wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 wrist_motor.setPower(-0.6);
                 arm_motor.setTargetPosition(100);
@@ -164,10 +164,22 @@ public class EditedTeleOp extends LinearOpMode {
                 outake_intake_motor.setPower(0);
            }
             if (gamepad2.left_bumper) {
-                outake_intake_motor.setPower(-1);
+                outake_intake_motor.setPower(-0.5);
             } else {
                 outake_intake_motor.setPower(0);
             }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                     if(gamepad2.b){
