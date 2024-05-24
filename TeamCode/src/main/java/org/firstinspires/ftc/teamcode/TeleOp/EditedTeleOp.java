@@ -92,7 +92,7 @@ public class EditedTeleOp extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
         outake_intake_motor = hardwareMap.get(DcMotor.class, "intake");
-        arm_motor = hardwareMap.get(DcMotor.class, "armmotor");
+        arm_motor = hardwareMap.get(DcMotor.class, "arm_motor");
         wrist_motor = hardwareMap.get(DcMotor.class, "wrist"); // was "test:wrist_motor"
         rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive ");
@@ -158,6 +158,11 @@ public class EditedTeleOp extends LinearOpMode {
 
 
             }
+            if (gamepad1.right_bumper) {
+
+
+            }
+
             if (gamepad2.right_bumper) {
                 outake_intake_motor.setPower(1);
             } else {
