@@ -136,24 +136,25 @@ public class EditedTeleOp extends LinearOpMode {
 //            you will have to hold down the "back" button while request any other action
 
             if (gamepad2.y) {
-                wrist_motor.setTargetPosition(350); // scoring position 697 ticks
+                wrist_motor.setTargetPosition(250); // scoring position 697 ticks // 250
                 wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 wrist_motor.setPower(0.6);
 
-                arm_motor.setTargetPosition(3350); // 974 tick revolution
+                arm_motor.setTargetPosition(3300); // 974 tick revolution // 3300
                 arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                arm_motor.setPower(0.6);
+                arm_motor.setPower(0.5);
 
-            }
+                            }
 
             if (gamepad2.a) {
                 wrist_motor.setTargetPosition(1200); //rest position
                 wrist_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                wrist_motor.setPower(-0.6);
+                wrist_motor.setPower(0.6);
 
-//                arm_motor.setTargetPosition(100);
-//                arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                arm_motor.setPower(-0.6);
+                arm_motor.setTargetPosition(300);
+               arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+              arm_motor.setPower(-0.5);
+
 
 
 
@@ -170,7 +171,7 @@ public class EditedTeleOp extends LinearOpMode {
                 outake_intake_motor.setPower(0);
            }
             if (gamepad2.left_bumper) {
-                outake_intake_motor.setPower(-0.5);
+                outake_intake_motor.setPower(-1);
             } else {
                 outake_intake_motor.setPower(0);
             }
