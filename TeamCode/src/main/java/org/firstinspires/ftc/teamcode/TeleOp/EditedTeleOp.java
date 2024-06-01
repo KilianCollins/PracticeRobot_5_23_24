@@ -93,7 +93,7 @@ public class EditedTeleOp extends LinearOpMode {
         // to the names assigned during the robot configuration step on the DS or RC devices.
         outake_intake_motor = hardwareMap.get(DcMotor.class, "intake");
         arm_motor = hardwareMap.get(DcMotor.class, "arm_motor");
-        wrist_motor = hardwareMap.get(DcMotor.class, "wrist"); // was "test:wrist_motor"
+        wrist_motor = hardwareMap.get(DcMotor.class, "wrist_motor"); // was "test:wrist_motor"
         rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive ");
         leftFrontDrive = hardwareMap.get(DcMotor.class, "left_front_drive");
