@@ -24,7 +24,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="GYATTRIZZLERAUTO", group="Robot")
+@Autonomous(name="Blue Auto", group="Robot")
 
 public class BlueSideParkingAuto extends LinearOpMode {
 
@@ -38,7 +38,7 @@ public class BlueSideParkingAuto extends LinearOpMode {
 
     private  DcMotor arm_motor = null;
     private  DcMotor wrist_motor = null;
-    //  private DcMotor outtake_intake_motor = null ;
+     private DcMotor outtake_intake_motor = null ;
     private ElapsedTime     runtime = new ElapsedTime();
 
 
@@ -55,7 +55,7 @@ public class BlueSideParkingAuto extends LinearOpMode {
         leftBackDrive = hardwareMap.get(DcMotor.class,"left_back_drive");
         arm_motor = hardwareMap.get(DcMotor.class,"arm_motor");
         wrist_motor =hardwareMap.get(DcMotor.class,"wrist_motor");
-        //outtake_intake_motor = hardwareMap.get(DcMotor.class,"outtake_intake_motor");
+        outtake_intake_motor = hardwareMap.get(DcMotor.class,"intake");
 
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -84,11 +84,11 @@ public class BlueSideParkingAuto extends LinearOpMode {
             telemetry.update();
 
             //Step 1:Strafe Right
-            leftFrontDrive.setPower(REVERSE_SPEED);
+           /* leftFrontDrive.setPower(REVERSE_SPEED);
             rightFrontDrive.setPower(FORWARD_SPEED);
             leftBackDrive.setPower(FORWARD_SPEED);
             rightBackDrive.setPower(REVERSE_SPEED);
-            sleep(2200);
+            sleep(1750);
 
             // Step 2:Go Forward`
             leftFrontDrive.setPower(REVERSE_SPEED);
@@ -100,16 +100,16 @@ public class BlueSideParkingAuto extends LinearOpMode {
             leftBackDrive.setPower(0);
             rightFrontDrive.setPower(0);
             leftFrontDrive.setPower(0);
-            rightBackDrive.setPower(0);
+            rightBackDrive.setPower(0);*/
 
             //Step 3: Arm Up
 
             //Step 1:Strafe Left
-            leftFrontDrive.setPower(FORWARD_SPEED);
-            rightFrontDrive.setPower(REVERSE_SPEED);
-            leftBackDrive.setPower(REVERSE_SPEED);
-            rightBackDrive.setPower(FORWARD_SPEED);
-            sleep(2200);
+            leftFrontDrive.setPower(REVERSE_SPEED);
+            rightFrontDrive.setPower(FORWARD_SPEED);
+            leftBackDrive.setPower(FORWARD_SPEED);
+            rightBackDrive.setPower(REVERSE_SPEED);
+            sleep(1000);
 
             // Step 2:Go Forward`
             leftFrontDrive.setPower(REVERSE_SPEED);
@@ -125,7 +125,7 @@ public class BlueSideParkingAuto extends LinearOpMode {
 
             //Step 3: Arm Up
 
-            arm_motor.setTargetPosition(3350);
+            arm_motor.setTargetPosition(-3350);
             arm_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             arm_motor.setPower(0.6);
             sleep(2500);//1450 just
@@ -136,10 +136,10 @@ public class BlueSideParkingAuto extends LinearOpMode {
             wrist_motor.setTargetPosition(350);
             wrist_motor.setMode((DcMotor.RunMode.RUN_TO_POSITION));
             wrist_motor.setPower(0.6);
-            sleep(2000);
+            sleep(2000); // 2100
 
             //Step 5: outtake and intake drop pixels
-            // outake_intake_motor.setPower(REVERSE_SPEED);
+             outtake_intake_motor.setPower(FORWARD_SPEED);
             sleep(8000);
 //          Step 4: arm and wrist go back to resting position
             arm_motor.setTargetPosition(100);
@@ -152,24 +152,6 @@ public class BlueSideParkingAuto extends LinearOpMode {
             wrist_motor.setPower(-0.6);
             sleep(2000);
 
-            leftFrontDrive.setPower(FORWARD_SPEED);
-            rightFrontDrive.setPower(FORWARD_SPEED);
-            leftBackDrive.setPower(FORWARD_SPEED);
-            rightBackDrive.setPower(FORWARD_SPEED);
-            sleep(800);
-
-
-            leftFrontDrive.setPower(FORWARD_SPEED);
-            rightFrontDrive.setPower(REVERSE_SPEED);
-            leftBackDrive.setPower(REVERSE_SPEED);
-            rightBackDrive.setPower(FORWARD_SPEED);
-            sleep(1000);
-
-
-            leftFrontDrive.setPower(REVERSE_SPEED);
-            leftBackDrive.setPower(REVERSE_SPEED);
-            rightFrontDrive.setPower(REVERSE_SPEED);
-            rightBackDrive.setPower(REVERSE_SPEED);
 
 
 
